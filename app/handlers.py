@@ -2,12 +2,18 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram import F, Router
 
+import app.keyboards as kb
+
 router = Router()
 
 
 @router.message(CommandStart())
 async def start(message: Message):
-    await message.reply(f"Hello!\nYour ID: {message.from_user.id}\nYour Name: {message.from_user.first_name}")
+    await message.reply(
+        f"Hello!\nYour ID: {message.from_user.id}\n"
+        f"Your Name: {message.from_user.first_name}",
+        reply_markup= await kb.inline_cars()
+    )
 
 
 @router.message(Command("help"))
